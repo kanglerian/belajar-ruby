@@ -985,8 +985,122 @@ How many?(Buy 3 or more for $1 discount):
 The total price is $16
 ```
 
-# **Class Inheritance
+# **Class Inheritance**
 ## 1. Class Inheritance
 ```ruby
+# menu.rb
+class Menu
+  attr_accessor :name
+  attr_accessor :price
+  
+  def initialize(name:, price:)
+    self.name = name
+    self.price = price
+  end
+  
+  def info
+    return "#{self.name} $#{self.price}"
+  end
+  
+  def get_total_price(count)
+    total_price = self.price * count
+    if count >= 3
+      total_price -= 1
+    end
+    return total_price
+  end
+end
+```
 
+```ruby
+# food.rb
+require "./menu"
+
+class Food < Menu
+
+end
+```
+
+```ruby
+# food.rb
+require "./menu"
+
+class Drink < Menu
+
+end
+```
+
+## 2. How Inheritance Works
+
+```ruby
+# food.rb
+require "./menu"
+
+class Food < Menu
+
+end
+```
+
+```ruby
+# food.rb
+require "./menu"
+
+class Drink < Menu
+
+end
+```
+
+```ruby
+# index.rb
+require "./food"
+require "./drink"
+
+food1 = Food.new(name:"Pizza",price:8)
+puts food1.info
+drink1 = Drink.new(name:"Cola",price:3)
+puts drink1.info
+```
+
+```console
+Pizza $8
+Cola $3
+```
+
+## 3. Adding Instance Variables
+
+
+```ruby
+# food.rb
+require "./menu"
+
+class Food < Menu
+  attr_accessor :calorie
+end
+```
+
+```ruby
+# food.rb
+require "./menu"
+
+class Drink < Menu
+  attr_accessor :volume
+end
+```
+
+```ruby
+# index.rb
+require "./food"
+require "./drink"
+
+food1 = Food.new(name:"Pizza",price:8)
+food1.calorie = 700
+puts food1.calorie
+drink1 = Drink.new(name:"Cola",price:3)
+drink1.volume = 500
+puts drink1.volume
+```
+
+```console
+700
+500
 ```
